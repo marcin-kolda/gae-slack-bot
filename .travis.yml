@@ -1,0 +1,18 @@
+language: python
+python:
+- '2.7'
+before_install:
+- openssl aes-256-cbc -K $encrypted_10b3eb08dcc1_key -iv $encrypted_10b3eb08dcc1_iv
+  -in client-secret.json.enc -out client-secret.json -d
+- pip install -t lib -r requirements.txt
+script:
+- echo "No Script to run"
+deploy:
+  provider: gae
+  keyfile: client-secret.json
+  project: bot-test-mk
+  version: v1
+  skip_cleanup: true
+  no_promote: true
+after_deploy:
+- git stash --all
