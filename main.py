@@ -1,7 +1,7 @@
 import logging
+import pprint
 
-from flask import Flask
-
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -9,6 +9,16 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     return 'Hello World!'
+
+
+@app.route('/slack/event', methods=['POST'])
+def hello():
+    json = request.get_json()
+    logging.debug(pprint.pformat(json))
+    # add token verification
+    return jsonify({
+        'challenge': json['challenge']
+    })
 
 
 @app.errorhandler(500)
