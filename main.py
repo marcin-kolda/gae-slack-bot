@@ -12,7 +12,7 @@ def hello():
 
 
 @app.route('/slack/event', methods=['POST'])
-def hello():
+def slack_event():
     json = request.get_json()
     logging.debug(pprint.pformat(json))
     # add token verification
