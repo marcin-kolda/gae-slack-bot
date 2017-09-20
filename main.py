@@ -17,9 +17,9 @@ def slack_event():
     logging.debug(pprint.pformat(json))
     # add token verification
     if 'challenge' in json:
-        return jsonify({
-            'challenge': json['challenge']
-        })
+        return jsonify({'challenge': json['challenge']})
+    else:
+        return jsonify({})
 
 
 @app.errorhandler(500)
