@@ -1,6 +1,6 @@
 import unittest
 
-from event import Event
+from src.event import Event
 
 
 class EventTest(unittest.TestCase):

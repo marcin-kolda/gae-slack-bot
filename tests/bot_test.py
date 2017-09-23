@@ -1,7 +1,7 @@
 import unittest
 
-from bot import Bot
-from event import Event
+from src.bot import Bot
+from src.event import Event
 from mock import patch, Mock
 
 
