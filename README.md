@@ -5,6 +5,6 @@ Google App Engine Slack bot using Event API
 
 # Configuration
 
-App required GCP billing enabled to use [Python Sockets API](https://cloud.google.com/appengine/docs/standard/python/sockets/),
+GAE app requires GCP billing enabled to use [Python Sockets API](https://cloud.google.com/appengine/docs/standard/python/sockets/),
 as traffic from sockets is billed as [outgoing bandwidth](https://cloud.google.com/appengine/docs/pricing#Billable_Resource_Unit_Costs).
 Sockets API is required for [python-slackclient](https://github.com/slackapi/python-slackclient).

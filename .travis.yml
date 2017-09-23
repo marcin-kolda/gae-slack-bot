@@ -14,6 +14,7 @@ before_install:
   - ./google-cloud-sdk/bin/gcloud components install app-engine-python --quiet
   - pip install -r requirements.txt
   - pip install -t lib -r requirements.txt
+  - pip install -r requirements_tests.txt
   - pip install coveralls
   - pip install pylint
 script:
