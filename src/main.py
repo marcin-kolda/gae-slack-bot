@@ -17,8 +17,8 @@ def root():
 
 @app.route('/slack/event', methods=['POST'])
 def slack_event():
+    logging.debug("Request payload: {}".format(request.data))
     json = request.get_json()
-    logging.debug(pprint.pformat(json))
     if 'token' not in json:
         logging.error("There is no token in the JSON")
         abort(401)
