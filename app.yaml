@@ -3,6 +3,11 @@ api_version: 1
 threadsafe: true
 
 handlers:
-- url: /.*
+- url: /
+  script: src.main.app
+  login: admin
+  secure: always
+
+- url: /slack/event
   script: src.main.app
   secure: always

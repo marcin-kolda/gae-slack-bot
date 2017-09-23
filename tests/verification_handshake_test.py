@@ -3,16 +3,17 @@ import json
 from src import main
 
 
-class BasicTest(unittest.TestCase):
+class VerificationHandshakeTest(unittest.TestCase):
     def setUp(self):
         main.app.testing = True
+        main.verification_token = "correct_token"
         self.app = main.app.test_client()
 
-    def test_verification_handshake(self):
+    def test_should_return_challenge(self):
         # given
         challenge = "3eZbrw1aBm2rZgRNFdxV"
         request = {
-            "token": "Jhj5dZrVaK7ZwHHjRyZWjbDl",
+            "token": "correct_token",
             "challenge": challenge,
             "type": "url_verification"
         }

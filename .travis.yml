@@ -1,6 +1,10 @@
 language: python
 python:
   - '2.7'
+env:
+  global:
+    - secure: "PKTd+IjS/Fg1ZVkj38+bog2Mz7xsJAZjdAHHx44ZCoAox/SQYafTTpokpI8aiW1YJX5PPLiMaaPWyougwFTS8QrsXv7pJoZF8rOGFxxFS3CR4ovhELc9CChfdaJIEwl2tzDFVi0FZi4XPTEjCGhHcjKTeUHFksHAwsJujMMIRdxDXpclRcUbQiTc4z4OdIzWLMjyfnbQ2ZOMtauaX4YVYovyio6tQNQCBPvRH874N4X+ZrW83sMtci6tuaJ4ySjw9qiq+LR7XBqbpgbLcWIA75eowzwwMvBZ6Js3PEkQwZITzQbMmHEXPh2+DStEdVsBQRQAXAOEnAgG0KhtdhLeKDTp4tl2rhBq0ozuRkKqy3leo8mSNcNyeMfWYqtMace7moaRErLeTVTE57cVSKlTVqMZQuOSJKF+EQhX9A1Gq3y6AEmeOAKC/mSNKVgAjBZtf+Bt4NfIcxMLgVCfXHnHfceOS9XUC1YJn6ijWLtyNiHxuFZlZxXqs0udwoAi1UZ+6i1WNCDEobjh7HnEbVQP1muyZp9s1DDKigdY5l8pPq8LeVlrUDRRrhSc/Ia0ldi71edcT5BwBt6Z8CedjSbFyBKYGCAf7yP26h9GhHz9mNLkGqe/yxPsqnRQ5EK9/5+Mcyt0cSs+QIUHYUYfFfsi8H53d0zWhT6/VrcmFEQNrKQ="
+    - secure: "S9XXs2ZXTref9DXcqkXIyP3JdctYRJ1yAkwSPEgdvtBUUh8+4daqh2gkOvLzJnWwkEzC47F1f5AAq3QGmepqfqSA3beTAGK3IAq900mnrCAtjeyukcjcfM4x0xYpfdmGhvlBF1mPukcE0MSACwZgO3mwVZhIUy2PV4dUoBuiVJjqktaeIGzcYyGevRzq+/Vlv3M8zuI884N/aFG0dXb3vGGqBBCm/t81gJUYAyaFWhwXcAGE5aEvN18KGz+hFnF6MTdhF6QI5VB09cRzIRmkW6Vm+/2/KccE4PINFez3wJZs3JHJ53m65p78sgaDPcTNsAc+Wr0mlijt41lBgnrvX3twSU/tHuw1e3DPWHWEqoj9g17UimjgndA5+2Ebuqyjy4BMUYvU8qeijZMvWc7ZWHsaaL+pbXM6E/ekDCW4g+NdAgzstNnpdBbTx3TcPS0Wki+ipaS8pai1lwnb2ss4QgyInBPCyzdA+4QXZzW8mkNnQ68V6HltYspMpBXYP+ysRZCYFuC2N6W/jQ0FJoq9YKU/jQpAA6SA+mTX7PqLon0RtZBkLX7spY5fgA90eTFBbKu+kH00HvMU1Vxe+zt3xD+S44RmK7LBN7LY3Tioqr/TREdSSsO0dqTCRtMI/APBAEewvrOmsr9Kvjo0C62T8LMCzd3EabCZn9humyiHIb4="
 before_install:
   - openssl aes-256-cbc -K $encrypted_10b3eb08dcc1_key -iv $encrypted_10b3eb08dcc1_iv
     -in client-secret.json.enc -out client-secret.json -d
@@ -16,6 +20,8 @@ script:
   - find . -name "*.py" -path "./*" -not \( -path "./lib/*" -o -path "./google-cloud-sdk/*" \) | xargs pylint --reports=yes --rcfile=.pylintrc && coverage run --source=src test_runner.py --test-path tests/ -v ./google-cloud-sdk
 after_success:
   coveralls
+before_deploy:
+- ./before_deploy.sh
 deploy:
   provider: gae
   keyfile: client-secret.json
