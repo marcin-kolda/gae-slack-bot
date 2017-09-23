@@ -7,8 +7,8 @@ class Event(object):
         return self.__json_event['event']['channel'].startswith('D')
 
     @property
-    def user_id(self):
-        return self.__json_event['event']['user']
+    def bot_id(self):
+        return self.__json_event['event'].get('bot_id', None)
 
     @property
     def text(self):
