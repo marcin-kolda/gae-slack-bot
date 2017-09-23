@@ -11,3 +11,7 @@ handlers:
 - url: /slack/event
   script: src.main.app
   secure: always
+
+libraries:
+- name: ssl
+  version: "2.7.11"
