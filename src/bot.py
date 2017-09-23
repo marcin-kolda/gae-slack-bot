@@ -20,6 +20,9 @@ class Bot(object):
         if event.bot_id == self.bot_id:
             logging.info("Ignoring own message")
             return
+        if event.is_bot_message():
+            logging.info("Ignoring bot message")
+            return
         self.slack_client.api_call(
             "chat.postMessage",
             channel=event.channel,

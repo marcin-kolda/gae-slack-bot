@@ -17,7 +17,7 @@ class BotTest(unittest.TestCase):
                        'authed_users': ['U75KAHN4T'],
                        "event": {"text": "<@U75KAHN4T> hey",
                                  "username": "GCP Bot",
-                                 "bot_id": "my_bot_id",
+                                 "bot_id": "bot_id",
                                  "type": "message",
                                  "subtype": "bot_message",
                                  "ts": "1506206439.000011",
