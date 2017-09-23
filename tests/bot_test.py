@@ -8,7 +8,7 @@ from mock import patch, Mock
 class BotTest(unittest.TestCase):
 
     @patch.object(Bot, "get_bot_id", return_value="bot_id")
-    def setUp(self, get_bot_id):
+    def setUp(self, get_bot_id=None):
         self.slack_client = Mock()
         self.bot = Bot(self.slack_client)
 
