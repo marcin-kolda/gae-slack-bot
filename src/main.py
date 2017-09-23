@@ -1,5 +1,4 @@
 import logging
-import pprint
 import settings
 
 from flask import Flask, request, jsonify, abort
