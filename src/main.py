@@ -6,6 +6,7 @@ import settings
 
 from flask import Flask, request, jsonify, abort
 
+from event import Event
 from bot import Bot
 
 app = Flask(__name__)
@@ -40,7 +41,7 @@ def slack_event():
     if 'challenge' in event:
         return jsonify({'challenge': event['challenge']})
     else:
-        bot.handle_event(event)
+        bot.handle_event(Event(event))
         return jsonify({})
 
 
