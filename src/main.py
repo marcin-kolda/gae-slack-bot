@@ -22,6 +22,7 @@ def root():
     slack_client.api_call(
         "chat.postMessage",
         channel="#general",
+        as_user=True,
         text="Hello from Google App Engine! :tada:, build date: {}, "
              "git commit: {}".format(settings.BUILD_DATE, settings.GIT_COMMIT)
     )
