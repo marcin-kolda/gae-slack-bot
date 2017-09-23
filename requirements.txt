@@ -1,1 +1,2 @@
 Flask==0.12.2
+slackclient==1.0.9

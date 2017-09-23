@@ -1,32 +1,46 @@
 import logging
+
+from slackclient import SlackClient
+
 import settings
 
 from flask import Flask, request, jsonify, abort
+
+from bot import Bot
 
 app = Flask(__name__)
 
 verification_token = settings.VERIFICATION_TOKEN
 
+slack_client = SlackClient(settings.BOT_ACCESS_TOKEN)
+bot = Bot(slack_client)
+
 
 @app.route('/')
 def root():
+    slack_client.api_call(
+        "chat.postMessage",
+        channel="#general",
+        text="Hello from Google App Engine! :tada:"
+    )
     return 'GAE Slack bot, build date: {}, git commit: {}' \
         .format(settings.BUILD_DATE, settings.GIT_COMMIT)
 
 
 @app.route('/slack/event', methods=['POST'])
 def slack_event():
-    logging.debug("Request payload: {}".format(request.data))
-    json = request.get_json()
-    if 'token' not in json:
+    logging.debug("Request payload: %s", request.data)
+    event = request.get_json()
+    if 'token' not in event:
         logging.error("There is no token in the JSON")
         abort(401)
-    if json['token'] != verification_token:
+    if event['token'] != verification_token:
         logging.error("Wrong token in JSON")
         abort(403)
-    if 'challenge' in json:
-        return jsonify({'challenge': json['challenge']})
+    if 'challenge' in event:
+        return jsonify({'challenge': event['challenge']})
     else:
+        bot.handle_event(event)
         return jsonify({})
 
 
