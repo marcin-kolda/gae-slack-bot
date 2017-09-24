@@ -18,7 +18,7 @@ bot = Bot(slack_client)
 
 @app.route('/')
 def root():
-    text = "Hello from Google App Engine! :tada:, build date: {}, git "\
+    text = "Hello from Google App Engine! :tada:, build date: {}, git " \
            "commit: {}".format(settings.BUILD_DATE, settings.GIT_COMMIT)
     slack_client.post_message(channel='#general',
                               text=text)
@@ -30,10 +30,11 @@ def slack_event():
     logging.debug("Request payload: %s", request.data)
     event = request.get_json()
     if 'token' not in event:
-        logging.error("There is no token in the JSON")
+        logging.error(
+            "There is no verification token in the JSON, discarding event")
         abort(401)
     if event['token'] != verification_token:
-        logging.error("Wrong token in JSON")
+        logging.error("Wrong verification token in JSON, discarding event")
         abort(403)
     if 'challenge' in event:
         return jsonify({'challenge': event['challenge']})
