@@ -17,6 +17,10 @@ class Bot(object):
             return user_id
 
     def handle_event(self, event):
+        if event.type == 'message':
+            self.__handle_message_event(event)
+
+    def __handle_message_event(self, event):
         if not self.user_id:
             self.user_id = self.get_user_id()
         if event.user_id == self.user_id:

@@ -14,5 +14,9 @@ class Event(object):
         return self.__json_event['event']['text']
 
     @property
+    def type(self):
+        return self.__json_event['event']['type']
+
+    @property
     def channel(self):
         return self.__json_event['event']['channel']
