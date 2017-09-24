@@ -1,33 +1,28 @@
 import logging
 
-from slackclient import SlackClient
-
 import settings
 
 from flask import Flask, request, jsonify, abort
 
 from event import Event
 from bot import Bot
+from slack_web_api_client import SlackWebAPIClient
 
 app = Flask(__name__)
 
 verification_token = settings.VERIFICATION_TOKEN
 
-slack_client = SlackClient(settings.BOT_ACCESS_TOKEN)
+slack_client = SlackWebAPIClient(settings.BOT_ACCESS_TOKEN)
 bot = Bot(slack_client)
 
 
 @app.route('/')
 def root():
-    slack_client.api_call(
-        "chat.postMessage",
-        channel="#general",
-        as_user=True,
-        text="Hello from Google App Engine! :tada:, build date: {}, "
-             "git commit: {}".format(settings.BUILD_DATE, settings.GIT_COMMIT)
-    )
-    return 'GAE Slack bot, build date: {}, git commit: {}' \
-        .format(settings.BUILD_DATE, settings.GIT_COMMIT)
+    text = "Hello from Google App Engine! :tada:, build date: {}, git "\
+           "commit: {}".format(settings.BUILD_DATE, settings.GIT_COMMIT)
+    slack_client.post_message(channel='#general',
+                              text=text)
+    return text
 
 
 @app.route('/slack/event', methods=['POST'])

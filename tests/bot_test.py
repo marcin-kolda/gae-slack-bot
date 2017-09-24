@@ -2,14 +2,13 @@ import unittest
 
 from src.bot import Bot
 from src.event import Event
-from mock import patch, Mock
+from mock import Mock
 
 
 class BotTest(unittest.TestCase):
-    @patch.object(Bot, "get_user_id", return_value="my_user_id")
-    def setUp(self, get_user_id=None):  # pylint: disable=W0221
+    def setUp(self):
         self.slack_client = Mock()
-        self.bot = Bot(self.slack_client)
+        self.bot = Bot(self.slack_client, user_id="my_user_id")
 
     def test_ignore_own_messages(self):
         # given
@@ -30,7 +29,7 @@ class BotTest(unittest.TestCase):
         self.bot.handle_event(event)
 
         # then
-        self.slack_client.api_call.assert_not_called()
+        self.slack_client.post_message.assert_not_called()
 
     def test_reply_successfully(self):
         # given
@@ -51,4 +50,4 @@ class BotTest(unittest.TestCase):
         self.bot.handle_event(event)
 
         # then
-        self.slack_client.api_call.assert_called_once()
+        self.slack_client.post_message.assert_called_once()
