@@ -5,7 +5,7 @@
 
 # How it works?
 
-![Architecture diagram](diagram.jpg)
+![Architecture diagram](diagram.png)
 
 This bot uses [Slack Events API](https://api.slack.com/events-api) to subscribe to selected events and reply via [Slack Web API](https://api.slack.com/web).
 
