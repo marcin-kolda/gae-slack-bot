@@ -15,4 +15,4 @@ This a proof of concept Slack bot example, which:
 * repeats every message in direct conversation or channels to which bot is invited,
 * verifies all incoming messages with [Slack verification token](https://api.slack.com/events-api#subscriptions), 
 * can run for free within [GCP Free Tier](https://cloud.google.com/free/) if there is a small traffic,
-* can automatically scale for larger traffic (requires enabling billing).
+* can automatically scale for larger traffic (requires billing enabled).
