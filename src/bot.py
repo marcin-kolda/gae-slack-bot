@@ -18,7 +18,7 @@ class Bot(object):
 
     def handle_event(self, event):
         if event.user_id == self.user_id:
-            logging.info("Ignoring own message")
+            logging.debug("Ignoring own message")
             return
         self.slack_client.api_call(
             "chat.postMessage",
