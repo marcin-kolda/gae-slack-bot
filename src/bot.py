@@ -19,6 +19,8 @@ class Bot(object):
     def handle_event(self, event):
         if event.type == 'message':
             self.__handle_message_event(event)
+        else:
+            logging.debug("Ignoring unknown event type")
 
     def __handle_message_event(self, event):
         if not self.user_id:

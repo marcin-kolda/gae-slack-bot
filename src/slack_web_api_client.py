@@ -14,7 +14,7 @@ class SlackWebAPIClient(object):
         form_fields = {
             'token': self.access_token,
             'channel': channel,
-            'text': text,
+            'text': text.encode('utf8'),
             'as_user': as_user
         }
         form_data = urllib.urlencode(form_fields)
