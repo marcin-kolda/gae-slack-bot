@@ -13,9 +13,9 @@ This bot uses [Slack Events API](https://api.slack.com/events-api) to subscribe 
 
 This is a proof of concept Slack bot example, which:
 * repeats every message in direct conversation or channels to which bot is invited,
-* verifies all incoming messages with [Slack verification token](https://api.slack.com/events-api#subscriptions), 
-* can run for free within [GCP Free Tier](https://cloud.google.com/free/) if there is a small traffic,
-* can automatically scale for larger traffic (requires billing enabled).
+* verifies all incoming Slack events with [verification token](https://api.slack.com/events-api#subscriptions), 
+* runs for free within [GCP Free Tier](https://cloud.google.com/free/) if there is a small traffic,
+* automatically scales for larger traffic (requires billing enabled).
 
 # Installation
 
@@ -27,8 +27,8 @@ This is a proof of concept Slack bot example, which:
 1. Deploy app using [gcloud app deploy](https://cloud.google.com/sdk/gcloud/reference/app/deploy) command, e.g. 
 `gcloud app deploy --version v1 --project your-gcp-project-id app.yaml`
 1. Visiting https://your-gcp-project-id.appspot.com page should trigger 'Hello World' message on #general channel. Slack Web API is now working!
-1. Subscribe to [message.channels](https://api.slack.com/events/message.channels) and [message.im](https://api.slack.com/events/message.im) event types by providing `https://your-gcp-project-id.appspot.com/slack/event` url - see [docs](https://api.slack.com/events-api#subscriptions) for details 
-1. Your bot is now working!
+1. Subscribe to [message.channels](https://api.slack.com/events/message.channels) and [message.im](https://api.slack.com/events/message.im) event types by providing `https://your-gcp-project-id.appspot.com/slack/event` url - see [docs](https://api.slack.com/events-api#subscriptions) for details, 
+1. Your bot is now working! You can start chatting with him.
 
 # Development
 
